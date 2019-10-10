@@ -95,7 +95,7 @@ public class VideoFragment extends Fragment {
         for(int i=0; i<8; i++){
             singerImageArrayList.add(getResources().getDrawable(R.drawable.image));
             singerNameArrayList.add("Singer Name "+(i+1));
-            videoCountArrayList.add(String.valueOf(2*i));
+            videoCountArrayList.add(String.valueOf(2*(i+1)));
         }
         VideoRecyclerViewAdapter videoRecyclerViewAdapter = new VideoRecyclerViewAdapter(
                 getContext(),singerImageArrayList,

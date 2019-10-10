@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,48 +37,55 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
     @Override
     public VideoRecyclerViewAdapter.SingerListAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
         view = inflater.inflate(R.layout.video_recyclerview_item,parent,false);
         SingerListAdapterVH holder = new SingerListAdapterVH(view);
+
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoRecyclerViewAdapter.SingerListAdapterVH holder, final int position) {
+    public void onBindViewHolder(@NonNull final VideoRecyclerViewAdapter.SingerListAdapterVH holder, final int position) {
+
         Glide.with(context).asBitmap().load(singerImageArrayList.get(position)).load(holder.singerImage);
         holder.singerName.setText(singerNameArrayList.get(position).toString());
         holder.videoCount.setText(videoCountArrayList.get(position).toString());
 
-        view.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String vCount= videoCountArrayList.get(position).toString().trim();
-            String sName = singerNameArrayList.get(position).toString().trim();
-            Bundle bundle = new Bundle();
-            bundle.putString("vCount",vCount);
-            bundle.putString("sName",sName);
-            Intent intent = new Intent(context,VideoList.class);
-            intent.putExtras(bundle);
-            context.startActivity(intent);
+                //Toast.makeText(context,singerNameArrayList.get(position)+"--"+videoCountArrayList.get(position),Toast.LENGTH_SHORT).show();
+                holder.bind(position);
             }
         });
 
     }
 
-
-
     @Override
     public int getItemCount() { return singerImageArrayList.size(); }
+
+
 
     class SingerListAdapterVH extends RecyclerView.ViewHolder{
         ImageView singerImage;
         TextView singerName,videoCount;
+        RelativeLayout layout;
 
         public SingerListAdapterVH(@NonNull View itemView) {
             super(itemView);
             singerImage = itemView.findViewById(R.id.videoItemImageId);
-            singerName = itemView.findViewById(R.id.singerNameTextId);
-            videoCount = itemView.findViewById(R.id.videoCountTextId);
+            singerName = itemView.findViewById(R.id.singerNameId);
+            videoCount = itemView.findViewById(R.id.videoCountId);
+            layout = itemView.findViewById(itemView.getId());
 
+        }
+        public void bind(int position){
+            Intent intent = new Intent(context,VideoList.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("vCount",videoCountArrayList.get(position).toString().trim());
+            bundle.putString("sName",singerNameArrayList.get(position).toString().trim());
+            intent.putExtras(bundle);
+            context.startActivity(intent);
         }
 
     }
