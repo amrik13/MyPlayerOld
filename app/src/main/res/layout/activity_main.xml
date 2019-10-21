@@ -1,91 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="horizontal"
-    tools:context=".MainActivity">
+    android:id="@+id/drawerId"
+    android:fitsSystemWindows="true"  >
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/songCardViewId"
-        android:background="@drawable/ic_back"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
-        android:layout_margin="10dp"
-        android:clickable="true" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:background="@drawable/ic_back"
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:layout_gravity="center"
-                android:textSize="25sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_marginTop="40dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SONGS" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/titlecolor"
+            android:id="@+id/mainToolBar"
+            android:elevation="8dp"
+            app:popupTheme="@style/TextAppearance.AppCompat.Title"
+            style="@style/Base.CardView"
+            android:theme="@style/Base.CardView"/>
 
-            <TextView
-                android:id="@+id/songCountTextId"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#1" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/videoCardViewId"
-        android:background="@drawable/ic_back"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
-        android:layout_margin="10dp" >
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:background="@drawable/ic_back"
+        <FrameLayout
+            android:id="@+id/floatingLayoutId"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:layout_gravity="center"
-                android:textSize="25sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_marginTop="40dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VIDEOS" />
-            <TextView
-                android:id="@+id/videoCountTextId"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#2" />
-        </LinearLayout>
+            android:layout_height="match_parent"/>
 
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/mainNavBar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu"
+        android:layout_gravity="start"/>
 
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

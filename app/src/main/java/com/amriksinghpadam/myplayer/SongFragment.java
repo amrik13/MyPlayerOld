@@ -1,6 +1,7 @@
 package com.amriksinghpadam.myplayer;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -25,6 +27,7 @@ public class SongFragment extends Fragment {
     private CarouselView carouselView;
     private int[] carouselImages = {R.drawable.aaaae,R.drawable.bbb,R.drawable.ccc,R.drawable.ddd,R.drawable.image,R.drawable.images};
     private RecyclerView recyclerView,recyclerView2, recyclerView3,recyclerView4;
+    private TextView moreFeature,moreLatest,moreDiscover;
     private ArrayList imageArrayList = new ArrayList();
     private ArrayList textArrayList = new ArrayList();
 
@@ -40,6 +43,40 @@ public class SongFragment extends Fragment {
         recyclerView = view.findViewById(R.id.artistRecyclerViewId);
         recyclerView2 = view.findViewById(R.id.latestSongRecyclerViewId);
         recyclerView3 = view.findViewById(R.id.generRecyclerViewId);
+        moreFeature = view.findViewById(R.id.more_fetured_id);
+        moreLatest = view.findViewById(R.id.more_latest_id);
+        moreDiscover = view.findViewById(R.id.more_discover_id);
+
+        moreFeature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title","Featured Artists");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        moreLatest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title","Latest Songs");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        moreDiscover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title","Discover");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         initRecyclerView();
         return view;

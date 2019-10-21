@@ -37,21 +37,19 @@ public class VideoFragment extends Fragment {
     private ArrayList videoCountArrayList = new ArrayList();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setActionBar(null);
         view = inflater.inflate(R.layout.fragment_video, container, false);
         viewPager = view.findViewById(R.id.videoViewPagerId);
         cardView = view.findViewById(R.id.videoCardViewId);
         headingText = view.findViewById(R.id.headerHeadingId);
         videoListrecyclerView = view.findViewById(R.id.videoRecyclerViewId);
-
         model = new ArrayList<>();
         // adding image, title, desc in model object
-        model.add(new VideoHeaderModel(R.drawable.a,"Java","Hello Java!!"));
-        model.add(new VideoHeaderModel(R.drawable.b,"Android","Hello Android!!"));
-        model.add(new VideoHeaderModel(R.drawable.c,"PHP","Hello PHP!!"));
-        model.add(new VideoHeaderModel(R.drawable.d,"Python","Hello Python!!"));
-
+        model.add(new VideoHeaderModel(R.drawable.a, "Most Watched", "Most Watched"));
+        model.add(new VideoHeaderModel(R.drawable.b, "New Video", "New Video"));
+        model.add(new VideoHeaderModel(R.drawable.c, "Hindi & Punjabi", "Hindi & Punjabi"));
+        model.add(new VideoHeaderModel(R.drawable.d, "English Video", "English Video"));
         //initializing colors for viewpager
         Integer[] temp_color = {
                 getResources().getColor(R.color.yellow1),
@@ -60,23 +58,21 @@ public class VideoFragment extends Fragment {
                 getResources().getColor(R.color.red4),
         };
         color = temp_color;
-        adapter = new VideoHeaderPagerAdapter(model,getContext());
+        adapter = new VideoHeaderPagerAdapter(model, getContext());
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(110,0,110,0);
+        viewPager.setPadding(110, 0, 110, 0);
         headingText.setText(model.get(0).getTitle());
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position<adapter.getCount()-1 && position < color.length-1){
+                if (position < adapter.getCount() - 1 && position < color.length - 1) {
                     viewPager.setBackgroundColor(
-                            (Integer)argb.evaluate(positionOffset,
+                            (Integer) argb.evaluate(positionOffset,
                                     color[position],
-                                    color[position+1]));
-
-                }else {
-                    viewPager.setBackgroundColor(color[color.length-1]);
+                                    color[position + 1]));
+                } else {
+                    viewPager.setBackgroundColor(color[color.length - 1]);
                 }
             }
             @Override
@@ -84,27 +80,21 @@ public class VideoFragment extends Fragment {
                 headingText.setText(model.get(position).getTitle());
             }
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         videoListrecyclerView.setLayoutManager(layoutManager);
-
-        for(int i=0; i<8; i++){
+        for (int i = 0; i < 8; i++) {
             singerImageArrayList.add(getResources().getDrawable(R.drawable.image));
-            singerNameArrayList.add("Singer Name "+(i+1));
-            videoCountArrayList.add(String.valueOf(2*(i+1)));
+            singerNameArrayList.add("Singer Name " + (i + 1));
+            videoCountArrayList.add(String.valueOf(2 * (i + 1)));
         }
         VideoRecyclerViewAdapter videoRecyclerViewAdapter = new VideoRecyclerViewAdapter(
-                getContext(),singerImageArrayList,
+                getContext(), singerImageArrayList,
                 singerNameArrayList,
                 videoCountArrayList);
         videoListrecyclerView.setAdapter(videoRecyclerViewAdapter);
-
         return view;
     }
-
-
 }

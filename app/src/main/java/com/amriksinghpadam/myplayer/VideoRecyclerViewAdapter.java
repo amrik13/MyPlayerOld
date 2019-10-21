@@ -2,6 +2,8 @@ package com.amriksinghpadam.myplayer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +49,8 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
     @Override
     public void onBindViewHolder(@NonNull final VideoRecyclerViewAdapter.SingerListAdapterVH holder, final int position) {
 
-        Glide.with(context).asBitmap().load(singerImageArrayList.get(position)).load(holder.singerImage);
+        //Glide.with(context).asBitmap().load(singerImageArrayList.get(position)).load(holder.singerImage);
+        holder.singerImage.setImageDrawable((BitmapDrawable) singerImageArrayList.get(position));
         holder.singerName.setText(singerNameArrayList.get(position).toString());
         holder.videoCount.setText(videoCountArrayList.get(position).toString());
 
@@ -58,13 +61,10 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
                 holder.bind(position);
             }
         });
-
     }
 
     @Override
     public int getItemCount() { return singerImageArrayList.size(); }
-
-
 
     class SingerListAdapterVH extends RecyclerView.ViewHolder{
         ImageView singerImage;
@@ -77,13 +77,12 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
             singerName = itemView.findViewById(R.id.singerNameId);
             videoCount = itemView.findViewById(R.id.videoCountId);
             layout = itemView.findViewById(itemView.getId());
-
         }
+
         public void bind(int position){
             Intent intent = new Intent(context,VideoList.class);
             Bundle bundle = new Bundle();
-            bundle.putString("vCount",videoCountArrayList.get(position).toString().trim());
-            bundle.putString("sName",singerNameArrayList.get(position).toString().trim());
+            bundle.putString("sName",position+"");
             intent.putExtras(bundle);
             context.startActivity(intent);
         }

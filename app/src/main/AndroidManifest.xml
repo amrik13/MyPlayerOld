@@ -9,13 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VideoList"></activity>
+        <activity android:name=".VideoExoPlayer"></activity>
+        <activity
+            android:name=".CommonPlayerGridView"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VideoList"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlayerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
