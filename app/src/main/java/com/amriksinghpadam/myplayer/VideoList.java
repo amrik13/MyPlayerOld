@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,28 +37,28 @@ public class VideoList extends AppCompatActivity {
         vListToolbar = findViewById(R.id.vListToolbarId);
         setSupportActionBar(vListToolbar);
 
-        for(int i=0; i<8; i++){
-            singerArray[i] = "Singer Name "+(i+1);
+        for (int i = 0; i < 8; i++) {
+            singerArray[i] = "Singer Name " + (i + 1);
         }
         int position = Integer.parseInt(getIntent().getStringExtra("sName"));
 
-        SpinnerItemAdapter adapter = new SpinnerItemAdapter(this,R.layout.spinner_single_item_singer,singerArray);
+        SpinnerItemAdapter adapter = new SpinnerItemAdapter(this, R.layout.spinner_single_item_singer, singerArray);
         listSpinner.setAdapter(adapter);
         listSpinner.setSelection(position);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(VideoList.this,3,LinearLayoutManager.VERTICAL,false);
+        GridLayoutManager layoutManager = new GridLayoutManager(VideoList.this, 3, LinearLayoutManager.VERTICAL, false);
         videoListRecyclerView.setLayoutManager(layoutManager);
 
         listSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-               // Toast.makeText(VideoList.this,position+"",Toast.LENGTH_SHORT).show();
+                // Toast.makeText(VideoList.this,position+"",Toast.LENGTH_SHORT).show();
                 //sName.setText(singerArray[position]);
                 bannerList.clear();
                 tittleList.clear();
                 Drawable resImage;
 
-                switch (position){
+                switch (position) {
                     case 0:
                         resImage = getResources().getDrawable(R.drawable.d);
                         break;
@@ -74,17 +76,22 @@ public class VideoList extends AppCompatActivity {
                         break;
                 }
 
-                for (int i=0;i<16;i++){
+                for (int i = 0; i < 16; i++) {
                     bannerList.add(resImage);
                     tittleList.add(singerArray[position]);
                 }
-                VideoListAdapter adapter = new VideoListAdapter(VideoList.this,bannerList,tittleList);
+                VideoListAdapter adapter = new VideoListAdapter(VideoList.this, bannerList, tittleList);
                 videoListRecyclerView.setAdapter(adapter);
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
-
+          //ATTENTION: This was auto-generated to handle app links.
+//        Intent appLinkIntent = getIntent();
+//        String appLinkAction = appLinkIntent.getAction();
+//        Uri appLinkData = appLinkIntent.getData();
     }
 }

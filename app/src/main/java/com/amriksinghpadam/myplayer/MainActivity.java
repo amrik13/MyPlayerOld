@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         bundle.putString("title","Featured Artists");
+                        bundle.putString("type","song");
                         intent.putExtras(bundle);
                         startActivity(intent);
                     break;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         bundle.putString("title","Latest Songs");
+                        bundle.putString("type","song");
                         intent.putExtras(bundle);
                         startActivity(intent);
                     break;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         bundle.putString("title","Discover");
+                        bundle.putString("type","song");
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         bundle.putString("title","Most Watched");
+                        bundle.putString("type","video");
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
@@ -91,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         bundle.putString("title","New Video");
+                        bundle.putString("type","video");
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         bundle.putString("title","Hindi & Punjabi");
+                        bundle.putString("type","video");
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
@@ -105,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         bundle.putString("title","English Video");
+                        bundle.putString("type","video");
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;

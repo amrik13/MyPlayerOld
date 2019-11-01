@@ -1,11 +1,13 @@
 package com.amriksinghpadam.myplayer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,9 +66,19 @@ public class PlayerLayoutAdapter extends RecyclerView.Adapter<PlayerLayoutAdapte
 
         }
 
-        public void bindView(int position){
+        public void bindView(final int position){
             Glide.with(context).asBitmap().load(imageList.get(position)).load(imageView);
             textView.setText(textList.get(position).toString());
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context,VideoExoPlayer.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title",textList.get(position).toString());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
         }
 
     }

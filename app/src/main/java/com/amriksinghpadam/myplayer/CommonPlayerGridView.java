@@ -28,6 +28,7 @@ public class CommonPlayerGridView extends AppCompatActivity {
         toolbar = findViewById(R.id.gridplayerid);
         setSupportActionBar(toolbar);
         Bundle bundle = getIntent().getExtras();
+        String type = bundle.getString("type");
         String title = bundle.getString("title");
         //Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
         getSupportActionBar().setTitle(title);
@@ -64,5 +65,14 @@ public class CommonPlayerGridView extends AppCompatActivity {
         CommonGridPlayerRecyclerViewAdapter adapter =
                 new CommonGridPlayerRecyclerViewAdapter(this,bannerList,tittleList);
         commonRecyclerView.setAdapter(adapter);
+
+        switch (type){
+            case "song":
+                Toast.makeText(this,"Song Type",Toast.LENGTH_SHORT).show();
+            break;
+            case "video":
+                Toast.makeText(this,"Video Type",Toast.LENGTH_SHORT).show();
+            break;
+        }
     }
 }

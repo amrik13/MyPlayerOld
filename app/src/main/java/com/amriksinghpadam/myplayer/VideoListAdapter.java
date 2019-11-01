@@ -1,8 +1,10 @@
 package com.amriksinghpadam.myplayer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +37,22 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoListHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VideoListHolder holder, final int position) {
         //Glide.with(context).asBitmap().load(imageList.get(position)).load(holder.videoBanner);
 
         holder.videoBanner.setImageDrawable((BitmapDrawable) imageList.get(position));
-
         holder.videoTitle.setText(tittleList.get(position).toString());
+        holder.videoBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,VideoExoPlayer.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title",tittleList.get(position).toString());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+                // Toast.makeText(context,"Player Starting",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

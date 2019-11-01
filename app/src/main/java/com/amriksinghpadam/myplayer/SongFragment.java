@@ -53,6 +53,7 @@ public class SongFragment extends Fragment {
                 Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("title","Featured Artists");
+                bundle.putString("type","song");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -63,6 +64,7 @@ public class SongFragment extends Fragment {
                 Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("title","Latest Songs");
+                bundle.putString("type","song");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -73,6 +75,7 @@ public class SongFragment extends Fragment {
                 Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("title","Discover");
+                bundle.putString("type","song");
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

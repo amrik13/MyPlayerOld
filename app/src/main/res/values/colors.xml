@@ -11,6 +11,7 @@
     <color name="red4">#855149</color>
 
     <color name="whiteColor">#fff</color>
+    <color name="blackColor">#000</color>
 
     <color name="statusbar">#3A006355</color>
 </resources>

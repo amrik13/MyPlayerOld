@@ -18,43 +18,40 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
-public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecyclerViewAdapter.SingerListAdapterVH> {
+public class RelatedViewAdapter extends RecyclerView.Adapter<RelatedViewAdapter.SingerListAdapterVH1> {
 
     private Context context;
     private ArrayList singerImageArrayList = new ArrayList();
     private ArrayList singerNameArrayList = new ArrayList();
-    private ArrayList videoCountArrayList = new ArrayList();
     private View view;
 
-    public VideoRecyclerViewAdapter(
+    public RelatedViewAdapter(
             Context context,ArrayList singerImageArrayList,
-            ArrayList singerNameArrayList, ArrayList videoCountArrayList) {
-            this.context = context;
-            this.singerImageArrayList.addAll(singerImageArrayList);
-            this.singerNameArrayList.addAll(singerNameArrayList);
-            this.videoCountArrayList.addAll(videoCountArrayList);
+            ArrayList singerNameArrayList) {
+        this.context = context;
+        this.singerImageArrayList.addAll(singerImageArrayList);
+        this.singerNameArrayList.addAll(singerNameArrayList);
+
     }
 
     @NonNull
     @Override
-    public VideoRecyclerViewAdapter.SingerListAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RelatedViewAdapter.SingerListAdapterVH1 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         view = inflater.inflate(R.layout.video_recyclerview_item,parent,false);
-        SingerListAdapterVH holder = new SingerListAdapterVH(view);
+        SingerListAdapterVH1 holder = new SingerListAdapterVH1(view);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final VideoRecyclerViewAdapter.SingerListAdapterVH holder, final int position) {
+    public void onBindViewHolder(@NonNull final RelatedViewAdapter.SingerListAdapterVH1 holder, final int position) {
 
         //Glide.with(context).asBitmap().load(singerImageArrayList.get(position)).load(holder.singerImage);
         holder.singerImage.setImageDrawable((BitmapDrawable) singerImageArrayList.get(position));
         holder.singerName.setText(singerNameArrayList.get(position).toString());
-        if(videoCountArrayList.size()!=0){
-            holder.videoCount.setText(videoCountArrayList.get(position).toString());
-        }
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,31 +60,30 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
             }
         });
     }
-
     @Override
     public int getItemCount() { return singerImageArrayList.size(); }
 
-    class SingerListAdapterVH extends RecyclerView.ViewHolder{
+    class SingerListAdapterVH1 extends RecyclerView.ViewHolder {
         ImageView singerImage;
         TextView singerName,videoCount;
         RelativeLayout layout;
 
-        public SingerListAdapterVH(@NonNull View itemView) {
+        public SingerListAdapterVH1(@NonNull View itemView) {
             super(itemView);
             singerImage = itemView.findViewById(R.id.videoItemImageId);
             singerName = itemView.findViewById(R.id.singerNameId);
             videoCount = itemView.findViewById(R.id.videoCountId);
-            layout = itemView.findViewById(itemView.getId());
+            layout = itemView.findViewById(R.id.singleItemId);
+            singerName.setTextColor(context.getResources().getColor(R.color.whiteColor));
+            videoCount.setText("");
         }
 
         public void bind(int position){
-            Intent intent = new Intent(context,VideoList.class);
+            Intent intent = new Intent(context,VideoExoPlayer.class);
             Bundle bundle = new Bundle();
-            bundle.putString("sName",position+"");
+            bundle.putString("title",singerNameArrayList.get(position).toString());
             intent.putExtras(bundle);
             context.startActivity(intent);
         }
-
     }
-
 }

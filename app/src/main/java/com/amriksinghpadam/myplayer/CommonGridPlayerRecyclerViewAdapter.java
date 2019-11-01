@@ -46,10 +46,10 @@ public class CommonGridPlayerRecyclerViewAdapter extends RecyclerView.Adapter<Co
             public void onClick(View view) {
                 Intent intent = new Intent(context,VideoExoPlayer.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("key","value");
+                bundle.putString("title",titleList.get(position).toString());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
-                Toast.makeText(context,"Player Starting",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,"Player Starting",Toast.LENGTH_SHORT).show();
             }
         });
     }

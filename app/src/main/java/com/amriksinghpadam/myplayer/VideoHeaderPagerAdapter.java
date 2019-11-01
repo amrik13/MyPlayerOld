@@ -48,6 +48,7 @@ public class VideoHeaderPagerAdapter extends PagerAdapter {
             public void onClick(View view) {
                 //Toast.makeText(context,models.get(position).getTitle(),Toast.LENGTH_SHORT).show();
                 bundle.putString("title",models.get(position).getTitle());
+                bundle.putString("type","video");
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
