@@ -1,6 +1,5 @@
 package com.amriksinghpadam.myplayer;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -30,6 +29,8 @@ public class SongFragment extends Fragment {
     private TextView moreFeature,moreLatest,moreDiscover;
     private ArrayList imageArrayList = new ArrayList();
     private ArrayList textArrayList = new ArrayList();
+    PlayerLayoutAdapter playerLayoutAdapter,playerLayoutAdapter2,playerLayoutAdapter3;
+    private int tempCount = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,54 +51,54 @@ public class SongFragment extends Fragment {
         moreFeature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("title","Featured Artists");
-                bundle.putString("type","song");
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(tempCount == 0) {
+                    Intent intent = new Intent(getContext(), CommonPlayerGridView.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", "Featured Artists");
+                    bundle.putString("type", "song");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    tempCount++;
+                }
             }
         });
         moreLatest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("title","Latest Songs");
-                bundle.putString("type","song");
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(tempCount == 0){
+                    Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title","Latest Songs");
+                    bundle.putString("type","song");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    tempCount++;
+                }
             }
         });
         moreDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(),CommonPlayerGridView.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("title","Discover");
-                bundle.putString("type","song");
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if(tempCount == 0) {
+                    Intent intent = new Intent(getContext(), CommonPlayerGridView.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", "Discover");
+                    bundle.putString("type", "song");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    tempCount++;
+                }
             }
         });
-
         initRecyclerView();
         return view;
     }
-
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(final int position, ImageView imageView) {
             imageView.setImageResource(carouselImages[position]);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getContext(),"Image - "+position,Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     };
-
     public void initRecyclerView(){
         int x = 1;
         while(x<=15){
@@ -105,22 +106,28 @@ public class SongFragment extends Fragment {
             imageArrayList.add(getActivity().getDrawable(R.drawable.ic_launcher_background));
             x++;
         }
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        PlayerLayoutAdapter playerLayoutAdapter = new PlayerLayoutAdapter(getContext(),imageArrayList,textArrayList);
+        playerLayoutAdapter = new PlayerLayoutAdapter(getContext(),imageArrayList,textArrayList);
         recyclerView.setAdapter(playerLayoutAdapter);
 
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView2.setLayoutManager(layoutManager2);
-        PlayerLayoutAdapter playerLayoutAdapter2 = new PlayerLayoutAdapter(getContext(),imageArrayList,textArrayList);
+        playerLayoutAdapter2 = new PlayerLayoutAdapter(getContext(),imageArrayList,textArrayList);
         recyclerView2.setAdapter(playerLayoutAdapter2);
 
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView3.setLayoutManager(layoutManager3);
-        PlayerLayoutAdapter playerLayoutAdapter3 = new PlayerLayoutAdapter(getContext(),imageArrayList,textArrayList);
+        playerLayoutAdapter3 = new PlayerLayoutAdapter(getContext(),imageArrayList,textArrayList);
         recyclerView3.setAdapter(playerLayoutAdapter3);
-
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        playerLayoutAdapter.tempCount = 0;
+        playerLayoutAdapter2.tempCount = 0;
+        playerLayoutAdapter3.tempCount = 0;
+        this.tempCount = 0;
+    }
 }

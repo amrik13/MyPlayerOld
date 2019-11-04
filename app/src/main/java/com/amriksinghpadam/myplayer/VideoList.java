@@ -28,6 +28,8 @@ public class VideoList extends AppCompatActivity {
     private ArrayList bannerList = new ArrayList();
     private ArrayList tittleList = new ArrayList();
 
+    VideoListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,5 +95,11 @@ public class VideoList extends AppCompatActivity {
 //        Intent appLinkIntent = getIntent();
 //        String appLinkAction = appLinkIntent.getAction();
 //        Uri appLinkData = appLinkIntent.getData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        VideoListAdapter.tempCount = 0;
     }
 }

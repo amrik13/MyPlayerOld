@@ -19,6 +19,7 @@ public class CommonPlayerGridView extends AppCompatActivity {
     private ArrayList bannerList = new ArrayList();
     private ArrayList tittleList = new ArrayList();
     private RecyclerView commonRecyclerView;
+    private CommonGridPlayerRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +44,26 @@ public class CommonPlayerGridView extends AppCompatActivity {
             switch (i){
                 case 0:
                     resImage = getResources().getDrawable(R.drawable.d);
-                    break;
+                break;
                 case 1:
                     resImage = getResources().getDrawable(R.drawable.c);
-                    break;
+                break;
                 case 2:
                     resImage = getResources().getDrawable(R.drawable.b);
-                    break;
+                break;
                 case 3:
                     resImage = getResources().getDrawable(R.drawable.a);
-                    break;
+                break;
                 default:
                     resImage = getResources().getDrawable(R.drawable.punjabi);
-                    break;
+                break;
             }
             bannerList.add(resImage);
             tittleList.add( title+" - "+(i+1));
         }
         GridLayoutManager layoutManager = new GridLayoutManager(this,3, LinearLayoutManager.VERTICAL,false);
         commonRecyclerView.setLayoutManager(layoutManager);
-        CommonGridPlayerRecyclerViewAdapter adapter =
-                new CommonGridPlayerRecyclerViewAdapter(this,bannerList,tittleList);
+        adapter = new CommonGridPlayerRecyclerViewAdapter(this,bannerList,tittleList);
         commonRecyclerView.setAdapter(adapter);
 
         switch (type){
@@ -74,5 +74,11 @@ public class CommonPlayerGridView extends AppCompatActivity {
                 Toast.makeText(this,"Video Type",Toast.LENGTH_SHORT).show();
             break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.tempCount=0;
     }
 }

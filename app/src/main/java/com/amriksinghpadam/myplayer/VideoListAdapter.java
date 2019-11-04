@@ -21,6 +21,8 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
     private Context context;
     private ArrayList imageList = new ArrayList();
     private ArrayList tittleList = new ArrayList();
+    static int tempCount = 0;
+
     public VideoListAdapter(Context context, ArrayList iList, ArrayList tList){
         this.context = context;
         this.imageList.addAll(iList);
@@ -45,11 +47,15 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
         holder.videoBanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,VideoExoPlayer.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("title",tittleList.get(position).toString());
-                intent.putExtras(bundle);
-                context.startActivity(intent);
+                if(tempCount==0){
+                    Intent intent = new Intent(context,VideoExoPlayer.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title",tittleList.get(position).toString());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                    tempCount++;
+                }
+
                 // Toast.makeText(context,"Player Starting",Toast.LENGTH_SHORT).show();
             }
         });

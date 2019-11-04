@@ -35,6 +35,8 @@ public class VideoFragment extends Fragment {
     private ArrayList singerImageArrayList = new ArrayList();
     private ArrayList singerNameArrayList = new ArrayList();
     private ArrayList videoCountArrayList = new ArrayList();
+    private VideoRecyclerViewAdapter videoRecyclerViewAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,11 +92,18 @@ public class VideoFragment extends Fragment {
             singerNameArrayList.add("Singer Name " + (i + 1));
             videoCountArrayList.add(String.valueOf(2 * (i + 1)));
         }
-        VideoRecyclerViewAdapter videoRecyclerViewAdapter = new VideoRecyclerViewAdapter(
+        videoRecyclerViewAdapter = new VideoRecyclerViewAdapter(
                 getContext(), singerImageArrayList,
                 singerNameArrayList,
                 videoCountArrayList);
         videoListrecyclerView.setAdapter(videoRecyclerViewAdapter);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.tempCount = 0;
+        videoRecyclerViewAdapter.tempCount = 0;
     }
 }

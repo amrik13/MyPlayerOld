@@ -25,6 +25,7 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
     private ArrayList singerNameArrayList = new ArrayList();
     private ArrayList videoCountArrayList = new ArrayList();
     private View view;
+     int tempCount = 0;
 
     public VideoRecyclerViewAdapter(
             Context context,ArrayList singerImageArrayList,
@@ -81,11 +82,15 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
         }
 
         public void bind(int position){
-            Intent intent = new Intent(context,VideoList.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("sName",position+"");
-            intent.putExtras(bundle);
-            context.startActivity(intent);
+            if(tempCount == 0){
+                Intent intent = new Intent(context,VideoList.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("sName",position+"");
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+                tempCount++;
+            }
+
         }
 
     }

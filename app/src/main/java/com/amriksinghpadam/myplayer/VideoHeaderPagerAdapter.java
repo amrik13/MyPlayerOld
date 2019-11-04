@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -18,6 +17,7 @@ public class VideoHeaderPagerAdapter extends PagerAdapter {
     private LayoutInflater inflater;
     ArrayList<VideoHeaderModel> models;
     Context context;
+     int tempCount=0;
 
     public VideoHeaderPagerAdapter(ArrayList<VideoHeaderModel> models, Context context) {
         this.models = models;
@@ -47,10 +47,14 @@ public class VideoHeaderPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(context,models.get(position).getTitle(),Toast.LENGTH_SHORT).show();
-                bundle.putString("title",models.get(position).getTitle());
-                bundle.putString("type","video");
-                intent.putExtras(bundle);
-                context.startActivity(intent);
+                if(tempCount==0){
+                    bundle.putString("title",models.get(position).getTitle());
+                    bundle.putString("type","video");
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                    tempCount++;
+                }
+
             }
         });
         return view;

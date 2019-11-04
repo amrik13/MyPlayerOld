@@ -26,7 +26,7 @@ public class PlayerLayoutAdapter extends RecyclerView.Adapter<PlayerLayoutAdapte
     private Context context;
     private ArrayList imageList = new ArrayList();
     private ArrayList textList = new ArrayList();
-
+    int tempCount = 0;
 
     PlayerLayoutAdapter(Context context, ArrayList imageList , ArrayList textList){
         this.context = context;
@@ -72,11 +72,14 @@ public class PlayerLayoutAdapter extends RecyclerView.Adapter<PlayerLayoutAdapte
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context,VideoExoPlayer.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title",textList.get(position).toString());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
+                    if(tempCount==0){
+                        Intent intent = new Intent(context,VideoExoPlayer.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title",textList.get(position).toString());
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
+                        tempCount++;
+                    }
                 }
             });
         }

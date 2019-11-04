@@ -9,17 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class CommonGridPlayerRecyclerViewAdapter extends RecyclerView.Adapter<CommonGridPlayerRecyclerViewAdapter.GridPlayerViewHolder> {
 
     private Context context;
+    int tempCount = 0;
     private ArrayList bannerList= new ArrayList();
     private ArrayList titleList = new ArrayList();
     public CommonGridPlayerRecyclerViewAdapter(Context context,ArrayList bList,ArrayList tList){
@@ -44,11 +42,15 @@ public class CommonGridPlayerRecyclerViewAdapter extends RecyclerView.Adapter<Co
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,VideoExoPlayer.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("title",titleList.get(position).toString());
-                intent.putExtras(bundle);
-                context.startActivity(intent);
+                if(tempCount==0){
+                    Intent intent = new Intent(context,VideoExoPlayer.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title",titleList.get(position).toString());
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                    tempCount++;
+                }
+
                 //Toast.makeText(context,"Player Starting",Toast.LENGTH_SHORT).show();
             }
         });

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.ArrayList;
@@ -24,10 +26,12 @@ public class RelatedViewAdapter extends RecyclerView.Adapter<RelatedViewAdapter.
     private ArrayList singerImageArrayList = new ArrayList();
     private ArrayList singerNameArrayList = new ArrayList();
     private View view;
+    private FragmentManager fm;
 
     public RelatedViewAdapter(
             Context context,ArrayList singerImageArrayList,
-            ArrayList singerNameArrayList) {
+            ArrayList singerNameArrayList,FragmentManager fm) {
+        this.fm = fm;
         this.context = context;
         this.singerImageArrayList.addAll(singerImageArrayList);
         this.singerNameArrayList.addAll(singerNameArrayList);
@@ -79,11 +83,19 @@ public class RelatedViewAdapter extends RecyclerView.Adapter<RelatedViewAdapter.
         }
 
         public void bind(int position){
-            Intent intent = new Intent(context,VideoExoPlayer.class);
+//            Intent intent = new Intent(context,VideoExoPlayer.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("title",singerNameArrayList.get(position).toString());
+//            intent.putExtras(bundle);
+//            context.startActivity(intent);
+
+            ExoPlayerFragment exoFrag = new ExoPlayerFragment(context,fm);
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.exo_frag_layout_id,exoFrag);
             Bundle bundle = new Bundle();
             bundle.putString("title",singerNameArrayList.get(position).toString());
-            intent.putExtras(bundle);
-            context.startActivity(intent);
+            exoFrag.setArguments(bundle);
+            ft.commit();
         }
     }
 }
