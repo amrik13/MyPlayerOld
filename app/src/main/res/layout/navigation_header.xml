@@ -18,5 +18,14 @@
             android:layout_height="110dp"
             android:src="@drawable/logo"/>
 
+        <TextView
+            android:id="@+id/app_version_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/version_text_size"
+            android:text="version: 1.1"
+            android:textColor="@color/whiteColor" />
+
 
 </LinearLayout>
