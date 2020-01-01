@@ -15,82 +15,107 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/songCardViewId"
-        android:background="@drawable/ic_back"
+        android:background="#BDDEDE"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="180dp"
         android:layout_gravity="center"
         android:layout_marginRight="80dp"
         app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
         android:clickable="true" >
-
         <LinearLayout
             android:id="@+id/linearLayout1"
-            android:background="@drawable/ic_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
+            android:orientation="vertical" >
+            <View
+                android:id="@+id/songImageView"
+                android:background="@drawable/ic_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+            <LinearLayout
                 android:layout_gravity="center"
-                android:textSize="25sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_marginTop="40dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SONGS" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:background="#BDDEDE"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/songCountTextId"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#1" />
+                <TextView
+                    android:id="@+id/songTitleId"
+                    android:layout_gravity="center"
+                    android:textSize="25sp"
+                    android:textColor="#1C1C1C"
+                    android:fontFamily="sans-serif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SONGS" />
 
+                <TextView
+                    android:id="@+id/songCountTextId"
+                    android:layout_gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="#1C1C1C"
+                    android:fontFamily="sans-serif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#1" />
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/videoCardViewId"
-        android:background="@drawable/ic_back"
+        android:background="#BDDEDE"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="180dp"
         android:layout_gravity="center"
         app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
         android:layout_marginLeft="80dp" >
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:background="@drawable/ic_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-
-            <TextView
+            <View
+                android:id="@+id/videoImageView"
+                android:background="@drawable/ic_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+            <LinearLayout
                 android:layout_gravity="center"
-                android:textSize="25sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_marginTop="40dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VIDEOS" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:background="#BDDEDE"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/videoTitleId"
+                    android:layout_gravity="center"
+                    android:textSize="25sp"
+                    android:textColor="#1C1C1C"
+                    android:fontFamily="sans-serif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIDEOS" />
 
-            <TextView
-                android:id="@+id/videoCountTextId"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:textColor="#1C1C1C"
-                android:fontFamily="sans-serif"
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#2" />
+                <TextView
+                    android:id="@+id/videoCountTextId"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/size"
+                    android:textColor="#1C1C1C"
+                    android:fontFamily="sans-serif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#2" />
+            </LinearLayout>
 
         </LinearLayout>
 

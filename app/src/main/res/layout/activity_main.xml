@@ -18,9 +18,7 @@
             android:background="@color/titlecolor"
             android:id="@+id/mainToolBar"
             android:elevation="8dp"
-            app:popupTheme="@style/TextAppearance.AppCompat.Title"
-            style="@style/Base.CardView"
-            android:theme="@style/Base.CardView"/>
+            app:popupTheme="@style/TextAppearance.AppCompat.Title" />
 
         <FrameLayout
             android:id="@+id/floatingLayoutId"
@@ -28,6 +26,17 @@
             android:layout_height="match_parent"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/progressBar_layout_id"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/mainNavBar"
