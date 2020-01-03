@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BDDEDE">
+    android:background="#D7DFDF">
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BDDEDE"
+    android:background="#D7DFDF"
     android:gravity="center"
     android:orientation="horizontal" >
 
@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_weight="2"
-                android:background="#BDDEDE"
+                android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -47,21 +47,12 @@
                     android:id="@+id/songTitleId"
                     android:layout_gravity="center"
                     android:textSize="25sp"
-                    android:textColor="#1C1C1C"
+                    android:textColor="@color/titlecolor"
                     android:fontFamily="sans-serif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SONGS" />
 
-                <TextView
-                    android:id="@+id/songCountTextId"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="#1C1C1C"
-                    android:fontFamily="sans-serif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#1" />
             </LinearLayout>
         </LinearLayout>
 
@@ -93,28 +84,19 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_weight="2"
-                android:background="#BDDEDE"
+                android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/videoTitleId"
                     android:layout_gravity="center"
                     android:textSize="25sp"
-                    android:textColor="#1C1C1C"
+                    android:textColor="@color/titlecolor"
                     android:fontFamily="sans-serif"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="VIDEOS" />
 
-                <TextView
-                    android:id="@+id/videoCountTextId"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/size"
-                    android:textColor="#1C1C1C"
-                    android:fontFamily="sans-serif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#2" />
             </LinearLayout>
 
         </LinearLayout>

@@ -5,12 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Toast;
-
+import com.amriksinghpadam.myplayer.api.APIConstent;
+import com.amriksinghpadam.myplayer.api.SharedPrefUtil;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CommonPlayerGridView extends AppCompatActivity {
@@ -25,41 +25,28 @@ public class CommonPlayerGridView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_player_grid_view);
-
         toolbar = findViewById(R.id.gridplayerid);
         setSupportActionBar(toolbar);
         Bundle bundle = getIntent().getExtras();
-        String type = bundle.getString("type");
-        String title = bundle.getString("title");
+        String type = bundle.getString(APIConstent.TYPE);
+        String pageTitle = bundle.getString(APIConstent.TITLE);
         //Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
-        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setTitle(pageTitle);
         toolbar.setTitleTextColor(getResources().getColor(R.color.whiteColor));
         commonRecyclerView = findViewById(R.id.common_grid_recycler_id);
 
         bannerList.clear();
         tittleList.clear();
-        Drawable resImage;
 
-        for (int i=0;i<16;i++){
-            switch (i){
-                case 0:
-                    resImage = getResources().getDrawable(R.drawable.d);
-                break;
-                case 1:
-                    resImage = getResources().getDrawable(R.drawable.c);
-                break;
-                case 2:
-                    resImage = getResources().getDrawable(R.drawable.b);
-                break;
-                case 3:
-                    resImage = getResources().getDrawable(R.drawable.a);
-                break;
-                default:
-                    resImage = getResources().getDrawable(R.drawable.punjabi);
-                break;
+        ArrayList<JSONObject> arrayList = SharedPrefUtil.getSideNavArtistJsonResponse(getApplicationContext());
+        for (int i=0;i<arrayList.size();i++){
+            try {
+                JSONObject obj = arrayList.get(i);
+                bannerList.add(obj.getString(APIConstent.IMAGEURL));
+                tittleList.add(obj.getString("artistname"));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            bannerList.add(resImage);
-            tittleList.add( title+" - "+(i+1));
         }
         GridLayoutManager layoutManager = new GridLayoutManager(this,3, LinearLayoutManager.VERTICAL,false);
         commonRecyclerView.setLayoutManager(layoutManager);
@@ -67,10 +54,10 @@ public class CommonPlayerGridView extends AppCompatActivity {
         commonRecyclerView.setAdapter(adapter);
 
         switch (type){
-            case "song":
+            case APIConstent.SONG:
                 Toast.makeText(this,"Song Type",Toast.LENGTH_SHORT).show();
             break;
-            case "video":
+            case APIConstent.VIDEO:
                 Toast.makeText(this,"Video Type",Toast.LENGTH_SHORT).show();
             break;
         }

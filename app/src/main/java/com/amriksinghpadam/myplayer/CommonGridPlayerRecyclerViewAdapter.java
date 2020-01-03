@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class CommonGridPlayerRecyclerViewAdapter extends RecyclerView.Adapter<CommonGridPlayerRecyclerViewAdapter.GridPlayerViewHolder> {
@@ -37,7 +39,8 @@ public class CommonGridPlayerRecyclerViewAdapter extends RecyclerView.Adapter<Co
 
     @Override
     public void onBindViewHolder(@NonNull GridPlayerViewHolder holder, final int position) {
-        holder.videoBanner.setImageDrawable((BitmapDrawable) bannerList.get(position));
+        Glide.with(context).load(bannerList.get(position)).into(holder.videoBanner);
+        //holder.videoBanner.setImageDrawable((BitmapDrawable) bannerList.get(position));
         holder.videoTitle.setText(titleList.get(position).toString());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
