@@ -1,15 +1,15 @@
-package com.amriksinghpadam.myplayer.api;
+package com.amriksinghpadam.api;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -39,7 +39,14 @@ public class APIConstent {
     final public static String NEW_ARIVAL_URL_PARAM = "player_api/call_api_request.php?latest_video=LATEST+VIDEO";
     final public static String HINDI_PUNJABI_URL_PARAM = "player_api/call_api_request.php?discover_video=4&discover_video_content=DICSCOVER+VIDEO";
     final public static String ENGLISH_URL_PARAM = "player_api/call_api_request.php?discover_video=6&discover_video_content=DICSCOVER+VIDEO";
+// Song API url param
+    final public static String TOP_IMAGE_URL_PARAM = "player_api/call_api_request.php?top_image_data=TOP+IMAGE";
+    final public static String TOP_AUTO_CAROUSEL_BANNER_URL_PARAM = "player_api/call_api_request.php?all_carousel_data=CAROUSEL";
+    final public static String TOP_IMAGE = "topimage";
+    final public static String CAROUSEL = "carousel";
 
+    //Media Pager View Selectiong Key
+    final public static String SECTION = "section";
 
 // API server Connection with string response
     public static String connectToServerWithURL(String uri){
@@ -65,9 +72,7 @@ public class APIConstent {
                     }
                     Log.d("Response", stringBuffer.toString());
                 }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 try {
@@ -75,7 +80,8 @@ public class APIConstent {
                         inputStreamReader.close();
                         bufferedReader.close();
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
+                    //Toast.makeText(context, "Connection Interrupted.", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
                 if(stringBuffer!=null && !TextUtils.isEmpty(stringBuffer))

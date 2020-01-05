@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:layout_gravity="center"
-            android:background="#93D9FFFB"
+            android:background="@drawable/ic_back"
             android:layout_width="135dp"
             android:layout_height="175dp" >
 
@@ -25,14 +25,13 @@
                 android:layout_height="150dp"
                 android:layout_alignParentTop="true"
                 android:elevation="10dp"
-                android:src="@drawable/logo"
                 android:scaleType="fitXY" />
 
             <TextView
                 android:id="@+id/commonGridTitleId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="111"
+                android:text="Loading..."
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:textSize="12sp"

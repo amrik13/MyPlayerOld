@@ -1,4 +1,4 @@
-package com.amriksinghpadam.myplayer.api;
+package com.amriksinghpadam.api;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -21,14 +21,16 @@ public class NavigationItemRequest {
     private String pageTitle="";
     private String contentType="";
     private String sharedPrefKey ="";
+    private boolean isFromSideNavbar;
 
     public NavigationItemRequest(Context mContext, RelativeLayout progressBarLayout, RelativeLayout refreshicon
-            , Intent intent, Bundle bundle){
+            , Intent intent, Bundle bundle,boolean isFromSideNavbar){
         this.mContext = mContext;
         this.progressBarLayout = progressBarLayout;
         this.refreshicon = refreshicon;
         this.intent = intent;
         this.bundle = bundle;
+        this.isFromSideNavbar = isFromSideNavbar;
     }
 
     public void startNavItemActivity(String pageTitle,String contentType,
@@ -61,7 +63,7 @@ public class NavigationItemRequest {
                 );
             }
         }
-        if (APIConstent.CONNECTIVITY == false) {
+        if (!APIConstent.CONNECTIVITY) {
             showToast(mContext.getResources().getString(R.string.internet_error_msg));
             refreshicon.setVisibility(View.VISIBLE);
         }
@@ -93,11 +95,13 @@ public class NavigationItemRequest {
             if(response!=null && !TextUtils.isEmpty(response)){
                 SharedPrefUtil.setSideNavItemJsonResponse(mContext,response,sharedPrefKey);
                 if(APIConstent.IS_SHARED_PREF_SAVED) {
-                    bundle.putString(APIConstent.TITLE, pageTitle);
-                    bundle.putString(APIConstent.TYPE, contentType);
-                    intent.putExtras(bundle);
-                    //showToast("saved and ready to go.");
-                    mContext.startActivity(intent);
+                    if(isFromSideNavbar) {
+                        bundle.putString(APIConstent.TITLE, pageTitle);
+                        bundle.putString(APIConstent.TYPE, contentType);
+                        intent.putExtras(bundle);
+                        //showToast("saved and ready to go.");
+                        mContext.startActivity(intent);
+                    }
                 }else{
                     showToast(mContext.getResources().getString(R.string.empty_shared_pref_error_msg));
                 }

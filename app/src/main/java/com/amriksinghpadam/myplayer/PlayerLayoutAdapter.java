@@ -67,7 +67,8 @@ public class PlayerLayoutAdapter extends RecyclerView.Adapter<PlayerLayoutAdapte
         }
 
         public void bindView(final int position){
-            Glide.with(context).asBitmap().load(imageList.get(position)).load(imageView);
+            //Glide.with(context).asBitmap().load(imageList.get(position)).load(imageView);
+            Glide.with(context).load(imageList.get(position)).into(imageView);
             textView.setText(textList.get(position).toString());
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override

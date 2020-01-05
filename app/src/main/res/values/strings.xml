@@ -19,6 +19,7 @@
     <string name="hindi_and_punjabi"><![CDATA[Hindi & Punjabi]]></string>
     <string name="english_video">English Video</string>
     <string name="video">video</string>
-    <string name="empty_shared_pref_error_msg">oops!! Sorry, We are facing some technical issues.</string>
+    <string name="empty_shared_pref_error_msg">oops!! Sorry, We are facing some technical issues or there is some connection error.</string>
+    <string name="empty_api_response">Empty Data Detected!</string>
 
 </resources>

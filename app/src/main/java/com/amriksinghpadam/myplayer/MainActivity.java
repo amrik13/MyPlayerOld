@@ -1,11 +1,9 @@
 package com.amriksinghpadam.myplayer;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
@@ -26,18 +24,14 @@ import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.amriksinghpadam.myplayer.api.APIConstent;
-import com.amriksinghpadam.myplayer.api.NavigationItemRequest;
-import com.amriksinghpadam.myplayer.api.SharedPrefUtil;
-import com.google.android.material.internal.NavigationMenuView;
+import com.amriksinghpadam.api.APIConstent;
+import com.amriksinghpadam.api.NavigationItemRequest;
+import com.amriksinghpadam.api.SharedPrefUtil;
 import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -128,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, CommonPlayerGridView.class);
                 Bundle bundle = new Bundle();
                 NavigationItemRequest navRequest = new NavigationItemRequest(MainActivity.this,
-                        progressBarLayout,refreshicon,intent,bundle);
+                        progressBarLayout,refreshicon,intent,bundle,true);
                 switch (menuItem.getItemId()) {
                     case R.id.nav_feature_id:
                         navRequest.startNavItemActivity(getResources().getString(R.string.artist_title),
@@ -150,25 +144,25 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_most_watch_id:
                         navRequest.startNavItemActivity(getResources().getString(R.string.most_watched),
-                                getResources().getString(R.string.song),APIConstent.MOST_WATCHED_URL_PARAM,
+                                getResources().getString(R.string.video),APIConstent.MOST_WATCHED_URL_PARAM,
                                 SharedPrefUtil.MOST_WATCHED_JSON_RESPONSE);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.nav_new_video_id:
                         navRequest.startNavItemActivity(getResources().getString(R.string.new_video),
-                                getResources().getString(R.string.song),APIConstent.NEW_ARIVAL_URL_PARAM,
+                                getResources().getString(R.string.video),APIConstent.NEW_ARIVAL_URL_PARAM,
                                 SharedPrefUtil.NEW_ARIVAL_JSON_RESPONSE);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.nav_indian_video_id:
                         navRequest.startNavItemActivity(getResources().getString(R.string.hindi_and_punjabi),
-                                getResources().getString(R.string.song),APIConstent.HINDI_PUNJABI_URL_PARAM,
+                                getResources().getString(R.string.video),APIConstent.HINDI_PUNJABI_URL_PARAM,
                                 SharedPrefUtil.HINDI_PUNJABI_JSON_RESPONSE);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.nav_englishi_video_id:
                         navRequest.startNavItemActivity(getResources().getString(R.string.english_video),
-                                getResources().getString(R.string.song),APIConstent.ENGLISH_URL_PARAM,
+                                getResources().getString(R.string.video),APIConstent.ENGLISH_URL_PARAM,
                                 SharedPrefUtil.ENGLISH_JSON_RESPONSE);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
@@ -182,10 +176,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class ContentTypeAPI extends AsyncTask<String, String, String> {
-        private String inlineResponse = "";
         private StringBuffer stringBuffer;
         ArrayList<String> contentTypeList, contentTypeImgList;
-        private HttpsURLConnection connection;
 
         public ContentTypeAPI() {
             contentTypeList = new ArrayList<>();
@@ -221,7 +213,8 @@ public class MainActivity extends AppCompatActivity {
                         contentTypeImgList.add(object.getString(APIConstent.IMAGEURL));
                     }
 
-                } catch (JSONException e) {
+                } catch (Exception e) {
+                    showToast("Connection Interrupted.");
                     e.printStackTrace();
                 }
                 Log.d("contenttypelist", contentTypeList.get(0) + "\n" + contentTypeList.get(1));
